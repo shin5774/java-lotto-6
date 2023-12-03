@@ -6,6 +6,7 @@ import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.Result;
 import lotto.domain.WinningLotto;
+import lotto.dto.BuyCashDto;
 import lotto.service.BuyCashService;
 import lotto.service.LottoService;
 import lotto.service.ResultService;
@@ -31,8 +32,8 @@ public class LottoGameController {
     public BuyCash inputBuyCash() {
         while (true) {
             try {
-                long inputBuyCash = inputView.inputBuyCashFromUser();
-                return buyCashService.generateBuyCash(inputBuyCash);
+                BuyCashDto buyCashDto = inputView.inputBuyCashFromUser();
+                return buyCashService.generateBuyCash(buyCashDto.requestCash());
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
             }

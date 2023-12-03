@@ -3,6 +3,8 @@ package lotto.view;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 import java.util.List;
+import lotto.dto.BuyCashDto;
+import lotto.util.Mapper;
 import lotto.util.Validator;
 
 public class InputView {
@@ -11,9 +13,9 @@ public class InputView {
     private static final String INPUT_WINNING_NUMBERS_MESSAGE = "당첨 번호를 입력해 주세요.";
     private static final String COMMA = ",";
 
-    public long inputBuyCashFromUser() {
+    public BuyCashDto inputBuyCashFromUser() {
         System.out.println(INPUT_BUY_CASH_MESSAGE);
-        return inputNumericValue();
+        return Mapper.toBuyCashDto(readLine());
     }
 
     public long inputBonusNumberFromUser() {
@@ -23,7 +25,7 @@ public class InputView {
 
     private long inputNumericValue() {
         String input = readLine();
-        Validator.INSTANCE.numberValidate(input);
+        Validator.numberValidate(input);
         System.out.println();
 
         return Long.parseLong(input);
@@ -32,7 +34,7 @@ public class InputView {
     public List<Integer> inputWinningNumbers() {
         System.out.println(INPUT_WINNING_NUMBERS_MESSAGE);
         List<String> inputNumbers = split(readLine());
-        inputNumbers.forEach(Validator.INSTANCE::numberValidate);
+        inputNumbers.forEach(Validator::numberValidate);
         System.out.println();
 
         return toIntegerList(inputNumbers);
